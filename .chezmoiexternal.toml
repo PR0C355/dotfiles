@@ -1,0 +1,16 @@
+# Fasfetch login presets
+[".config/fastfetch/login-presets"]
+    type = "archive"
+    url = "https://github.com/benhaube/fastfetch-login-preset/archive/master.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+    include = ["*/*.jsonc"]
+
+[".config/ghostty/shaders"]
+    type = "archive"
+    url = "https://github.com/sahaj-b/ghostty-cursor-shaders/archive/main.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+    include = ["*/*.glsl"]

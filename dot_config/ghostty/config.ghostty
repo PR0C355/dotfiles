@@ -17,3 +17,5 @@ font-family = JetBrainsMono Nerd Font
 
 macos-icon = xray
 macos-icon-frame = chrome
+
+custom-shader = shaders/cursor_tail.glsl
