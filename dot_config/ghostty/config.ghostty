@@ -14,3 +14,6 @@ keybind = super+r=new_split:right
 
 # Empty values reset the configuration to the default value
 font-family = JetBrainsMono Nerd Font
+
+macos-icon = xray
+macos-icon-frame = chrome

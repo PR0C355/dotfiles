@@ -1,0 +1,111 @@
+# ~/.zshrc
+
+# ==============================================================================
+# 1. ENVIRONMENT VARIABLES
+# ==============================================================================
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+
+# Terminal workaround for Ghostty
+if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+    export TERM=xterm
+fi
+
+# Zsh Autosuggestions styling
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#A9A9A9,bold,underline"
+
+
+# ==============================================================================
+# 2. PATH & FPATH
+# ==============================================================================
+
+# eza completions (Add to FPATH before compinit/plugins load)
+export FPATH="$HOME/.local/share/eza/completions/zsh:$FPATH"
+
+# User paths
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+export PATH="$HOME/.opencode/bin:$PATH"
+
+
+# ==============================================================================
+# 3. EXTERNAL SCRIPTS & ALIASES
+# ==============================================================================
+
+# Local environment variables
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
+
+# Load Conda aliases silently 
+if [[ -f "$HOME/cli-config/aliases.sh" ]]; then
+    . "$HOME/cli-config/aliases.sh"
+fi
+
+
+# ==============================================================================
+# 4. ZNAP & PLUGINS
+# ==============================================================================
+
+# Custom CLI Tip of the Day (Cross-Platform)
+if [ -f ~/.cli_tips.txt ]; then
+    if [ "$(uname)" = "Darwin" ]; then
+        # macOS specific: Uses awk for randomization
+        RANDOM_TIP=$(awk 'BEGIN{srand()} {a[NR]=$0} END{print a[int(rand()*NR)+1]}' ~/.cli_tips.txt)
+    else
+        # Linux specific: Uses shuf
+        RANDOM_TIP=$(shuf -n 1 ~/.cli_tips.txt)
+    fi
+    echo -e "\n💡 Tip: $RANDOM_TIP"
+fi
+
+# Bootstrap Znap
+[[ -r ~/.local/share/znap/znap.zsh ]] || git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ~/.local/share/znap
+source ~/.local/share/znap/znap.zsh
+
+# Prompt Setup
+# Cache Starship initialization standard output directly to bytecode
+znap eval starship 'starship init zsh --print-full-init'
+# Force Zsh to visually render the prompt immediately
+znap prompt
+
+# Core Plugins
+znap source zsh-users/zsh-completions
+znap source zsh-users/zsh-autosuggestions
+znap source Aloxaf/fzf-tab
+znap source wfxr/forgit
+
+# Tool Initializations
+znap eval fzf "fzf --zsh"
+znap eval zoxide "zoxide init zsh --cmd cd"
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	command rm -f -- "$tmp"
+}
+
+# Lazy-load environments (Uncomment when needed)
+# znap eval fnm 'fnm env --use-on-cd --version-file-strategy=recursive'
+
+
+# ==============================================================================
+# 5. SYNTAX HIGHLIGHTING & FINAL EXECUTIONS
+# ==============================================================================
+
+# zsh-patina completions (Must be at the very end!)
+znap eval zsh-patina-act "zsh-patina activate"
+znap eval zsh-patina-comp "zsh-patina completion"
+
+znap eval fd-comp "fd --gen-completions zsh"
+
+# NOTE: You mentioned syntax highlighting in your comments, but no plugin was sourced.
+# If you want it, uncomment the line below. It must remain the absolute last plugin!
+# znap source zsh-users/zsh-syntax-highlighting
+
+. "$HOME/.aliases.sh"  # Load aliases
+
