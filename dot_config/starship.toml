@@ -1,0 +1,113 @@
+format = """$os$username$hostname$directory$git_branch$git_status$python$nodejs$golang$rust$java$helm$line_break$character"""
+
+right_format = """$kubernetes$terraform$cmd_duration$time"""
+
+[os]
+disabled = false
+format = '[$symbol$name]($style) '
+style = "bold white"
+
+[os.symbols]
+Macos   = " "
+Linux   = " "
+Ubuntu  = " "
+Debian  = " "
+Fedora  = " "
+Arch    = " "
+Windows = " "
+
+[username]
+show_always = false
+style_user = "bold yellow"
+style_root = "bold red"
+format = '[$user]($style)@'
+
+[hostname]
+ssh_only = false
+format = '[$ssh_symbol$hostname]($style) '
+ssh_symbol = " "
+style = "dimmed white"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold blue"
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = "bold red"
+
+# --- Language versions (only shown in relevant project dirs) ---
+
+[python]
+symbol = " "
+format = '[$symbol($version)(\($virtualenv\))]($style) '
+style = "yellow"
+detect_files = ["requirements.txt", "pyproject.toml", "setup.py", "Pipfile", "uv.lock"]
+detect_folders = [".venv"]
+
+[nodejs]
+symbol = " "
+format = '[$symbol($version)]($style) '
+style = "green"
+detect_files = ["package.json", ".nvmrc", ".node-version"]
+
+[golang]
+symbol = " "
+format = '[$symbol($version)]($style) '
+style = "cyan"
+
+[rust]
+symbol = " "
+format = '[$symbol($version)]($style) '
+style = "bold red"
+
+[java]
+symbol = " "
+format = '[$symbol($version)]($style) '
+style = "bold orange"
+
+[helm]
+disabled = false
+symbol = " "
+format = '[$symbol($version)]($style) '
+style = "bold white"
+
+# --- Right prompt: infra context ---
+
+[kubernetes]
+disabled = false
+symbol = "⎈ "
+format = '[$symbol$context( \($namespace\))]($style) '
+contexts = [
+  {context_pattern = "docker-desktop", style = "bold green"},
+  {context_pattern = "local", style = "green"},
+  {context_pattern = "anvil.*", style = "bold yellow"},
+  {context_pattern = "geddes.*", style = "bold orange"},
+  {context_pattern = ".*unc.*|.*cloudapps.*", style = "bold blue"},
+]
+
+[terraform]
+disabled = false
+symbol = " "
+format = '[$symbol$workspace]($style) '
+style = "bold purple"
+
+[cmd_duration]
+min_time = 2_000
+format = "[ $duration]($style) "
+style = "yellow"
+
+[time]
+disabled = false
+format = '[$time]($style) '
+time_format = "%H:%M"
+style = "dimmed white"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
