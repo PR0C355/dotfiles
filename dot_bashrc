@@ -1,0 +1,5 @@
+# ~/.bashrc
+
+eval "$(starship init bash)"
+
+echo "Controlled by chezmoi"
