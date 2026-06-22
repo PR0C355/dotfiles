@@ -1,0 +1,66 @@
+{
+  "extensions.autoUpdate": false,
+  "extensions.autoCheckUpdates": false,
+  "extensions.ignoreRecommendations": true,
+  "extensions.showRecommendationsOnlyOnDemand": false,
+  "update.channel": "none",
+  "update.showReleaseNotes": false,
+  "terminal.integrated.env.windows": {
+    "JAVA_HOME": "C:\\Users\\Public\\wpilib\\2022\\jdk",
+    "PATH": "C:\\Users\\Public\\wpilib\\2022\\jdk\\bin;${env:PATH}"
+  },
+  "git.autofetch": true,
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "git.alwaysSignOff": true,
+  "git.confirmSync": false,
+  "terminal.integrated.inheritEnv": false,
+  "python.defaultInterpreterPath": "/usr/bin/python3",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "workbench.iconTheme": "file-icons",
+  "python.testing.pytestEnabled": true,
+  "editor.inlineSuggest.enabled": true,
+  "workbench.colorTheme": "Winter is Gone (Dark Black)",
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": false,
+    "scminput": false,
+    "yaml": false,
+    "java": false,
+    "python": true,
+    "c": false
+  },
+  "terminal.integrated.env.osx": {
+    "JAVA_HOME": "/Users/tumi/wpilib/2023/jdk",
+    "PATH": "/Users/tumi/wpilib/2023/jdk/bin:/Users/tumi/wpilib/2023/jdk/bin:${env:PATH}"
+  },
+  "window.zoomLevel": 1,
+  "terminal.external.osxExec": "Ghostty.app",
+  "files.watcherExclude": {
+    "**/anaconda3/**": true
+  },
+  "editor.cursorSmoothCaretAnimation": "on",
+  "dart.flutterSdkPath": "/Users/tumi/flutter",
+  "workbench.sideBar.location": "right",
+  "database-client.autoSync": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "chat.agent.enabled": false,
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+  "pylint.args": [
+    "\"--extension-pkg-whitelist=cv2\""
+  ],
+  "claudeCode.preferredLocation": "panel",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace, 'JetBrainsMono Nerd Font'"
+}
