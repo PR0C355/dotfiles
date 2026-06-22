@@ -7,6 +7,12 @@ alias ll='ls -la'
 ## Show hidden files
 alias l.='ls --color=auto -d .* '
 
+## Git aliases
+alias g='git'
+alias gs='git status'
 
 ## Alias for fastfetch
-alias fastfetch='fastfetch --config ~/.config/fastfetch/config.fastfetch'
+alias ff='fastfetch --config ~/.config/fastfetch/config.jsonc'
+
+## Relaod the shell configuration
+alias reload='exec zsh'
