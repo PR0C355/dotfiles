@@ -10,3 +10,36 @@ You have 'eza' installed! Try 'eza -la --icons' or 'eza --tree' for a vastly sup
 Press the 'Right Arrow' key to accept the greyed-out zsh-autosuggestion for your current command.
 Keep your shell fresh: run 'znap pull' occasionally to update all your zsh-snap plugins.
 Your default editor is Neovim. Type 'nvim .' to open the current directory directly into your editor.
+Use 'z <partial-path>' to jump to frequently visited directories instantly. 'zi' opens an interactive picker powered by zoxide.
+Run 'btop' for a beautiful, interactive system monitor. It shows CPU, memory, network, and processes all in one view.
+Pipe any JSON into 'jq' for pretty-printing and filtering. Try 'curl -s <api> | jq .results' to extract nested fields.
+Use 'rg <pattern>' instead of 'grep -r'. ripgrep is faster, respects .gitignore, and highlights matches by default.
+Manage your dotfiles with chezmoi: 'chezmoi add <file>' to track, 'chezmoi diff' to preview changes, 'chezmoi apply' to sync.
+Your prompt is powered by Starship! Run 'starship explain' to see what each segment means, or 'starship timings' to find slow modules.
+Use '7z x <archive>' to extract almost any archive format. Works with zip, tar.gz, rar, 7z, and many more.
+Convert media with ffmpeg: 'ffmpeg -i input.mov output.mp4' for video, or 'ffmpeg -i input.wav output.mp3' for audio.
+Manipulate images from the terminal with ImageMagick: 'magick input.png -resize 50% output.png' to resize, or 'magick convert *.jpg output.pdf' to combine into a PDF.
+Extract text from PDFs with poppler: 'pdftotext document.pdf -' pipes the text to stdout. Use 'pdfinfo' to inspect metadata.
+Render SVGs to PNG from the command line with resvg: 'resvg input.svg output.png' for crisp, high-quality rasterization.
+Use 'z -' to instantly jump back to your previous directory, just like 'cd -', but fully integrated with zoxide's smart tracking.
+Need to run a command on everything you find? Use 'fd  -X ' to execute a command on all search results at once (e.g., 'fd -e tmp -X rm' deletes all '.tmp' files).
+Press 'r' in Yazi to trigger its built-in bulk renamer, allowing you to edit multiple filenames simultaneously using your default editor (Neovim).
+Pass the '--git' flag to 'eza -la' to display Git status letters right next to your file permissions.
+Use 'rg -C 3 ' to show 3 lines of context around your ripgrep search matches, or 'rg -l ' to just print the filenames that contain the match.
+Add the '-r' (raw) flag when extracting strings with jq (e.g., 'jq -r .version') to remove surrounding JSON quotes.
+Pass '--preview "bat --color=always {}"' to 'fzf' to instantly see a syntax-highlighted preview of the text file you currently have selected.
+Configure 'fzf-tab' to use 'eza --tree' in its preview window, allowing you to see the nested structure of a directory before you hit enter.
+Use 'gi' to interactively search and download '.gitignore' templates from the web, or 'gd' to step through your current git diffs interactively with forgit.
+Run 'chezmoi edit ' to modify a tracked dotfile safely in its source state before running 'chezmoi apply'.
+Press 'Alt+f' (or 'Ctrl+Right Arrow') to accept just the next word of the greyed-out zsh-autosuggestion, rather than the entire line.
+Run 'znap restart' to recompile your scripts and flush out old cache files, guaranteeing your Zsh startup time stays lightning fast.
+Test entirely different Starship prompt configurations on the fly by overriding the config path: 'STARSHIP_CONFIG=~/.config/starship-alt.toml zsh'.
+Use 'bat -A' to display non-printable characters like spaces, tabs, and line endings to debug invisible whitespace errors.
+Jump straight to the exact line of a compile error or stack trace by launching Neovim with 'nvim + '.
+Press 'f' in 'btop' to quickly filter the process list by name, or use Vim keys (h, j, k, l) to navigate the UI without your mouse.
+Append '-p' to your '7z a archive.7z folder/' command, and it will securely prompt you to enter an encryption password.
+Extract audio from a video instantly without losing quality by using '-vn' and copying the audio stream: 'ffmpeg -i video.mp4 -vn -c:a copy audio.m4a'.
+Batch convert an entire folder of modern images by using mogrify: run 'magick mogrify -format png *.webp' to convert all WebP files to PNGs in place.
+Use 'pdfimages -all document.pdf output_prefix' to rip every single embedded image out of a PDF in their original, uncompressed formats using poppler.
+Use the '--background' flag with resvg: 'resvg --background white input.svg output.png' to add a solid background to transparent SVGs.
+Use 'gum' to add flair to shell scripts: 'gum choose' for menus, 'gum input' for prompts, 'gum spin' for spinners, and 'gum style' for styled text.

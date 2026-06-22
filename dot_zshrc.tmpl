@@ -77,7 +77,12 @@ if [ -f ~/.cli_tips.txt ]; then
     {{- else }}
     RANDOM_TIP=$(shuf -n 1 ~/.cli_tips.txt)
     {{- end }}
-    echo -e "\n💡 Tip: $RANDOM_TIP"
+    if command -v gum &> /dev/null; then
+        echo ""
+        gum style --border rounded --padding "0 2" --border-foreground 212 "💡 $RANDOM_TIP"
+    else
+        echo -e "\n💡 Tip: $RANDOM_TIP"
+    fi
 fi
 
 # Bootstrap Znap

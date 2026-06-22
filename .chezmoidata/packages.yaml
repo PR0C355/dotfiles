@@ -20,6 +20,7 @@ packages:
     - 'ripgrep'
     - 'resvg'
     - 'imagemagick-full'
+    - 'gum'
     casks:
     - 'font-jetbrains-mono-nerd-font'
     - 'font-symbols-only-nerd-font'
@@ -41,6 +42,7 @@ packages:
     - 'ripgrep'
     - 'resvg'
     - 'imagemagick'
+    - 'gum'
     - 'nerd-fonts.jetbrains-mono'
     - 'nerd-fonts.symbols-only'
     flakes:

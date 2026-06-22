@@ -61,22 +61,26 @@ detect_files = ["package.json", ".nvmrc", ".node-version"]
 symbol = " "
 format = '[$symbol($version)]($style) '
 style = "cyan"
+detect_files = ["go.mod", "go.sum", "go.work"]
 
 [rust]
 symbol = " "
 format = '[$symbol($version)]($style) '
 style = "bold red"
+detect_files = ["Cargo.toml", "Cargo.lock"]
 
 [java]
 symbol = " "
 format = '[$symbol($version)]($style) '
 style = "bold orange"
+detect_files = ["pom.xml", "build.gradle", "build.gradle.kts", ".java-version"]
 
 [helm]
 disabled = false
 symbol = " "
 format = '[$symbol($version)]($style) '
 style = "bold white"
+detect_files = ["Chart.yaml"]
 
 # --- Right prompt: infra context ---
 
@@ -97,6 +101,7 @@ disabled = false
 symbol = " "
 format = '[$symbol$workspace]($style) '
 style = "bold purple"
+detect_files = ["main.tf", "terraform.tfvars", ".terraform.lock.hcl"]
 
 [cmd_duration]
 min_time = 2_000
