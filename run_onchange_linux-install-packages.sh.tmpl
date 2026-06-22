@@ -1,0 +1,17 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+
+echo "Installing packages with nix..."
+
+{{ range .packages.linux.nixpkgs -}}
+nix profile install nixpkgs#{{ . }}
+{{ end -}}
+
+echo "Installing flake packages with nix..."
+
+{{ range .packages.linux.flakes -}}
+nix profile install {{ . }}
+{{ end -}}
+
+echo "All packages installed."
+{{ end -}}

@@ -1,0 +1,22 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+brew bundle --file=/dev/stdin <<EOF
+
+## Add taps
+{{ range .packages.darwin.taps -}}
+tap {{ . | quote }}
+{{ end -}}
+
+## Install packages
+{{ range .packages.darwin.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+
+## Install casks
+{{ range .packages.darwin.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+
+EOF
+{{ end -}}

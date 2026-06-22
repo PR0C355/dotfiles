@@ -1,0 +1,43 @@
+packages:
+  darwin:
+    taps:
+    - 'michel-kraemer/zsh-patina'
+    brews:
+    - 'git'
+    - 'zsh-patina'
+    - 'fzf'
+    - 'zoxide'
+    - 'eza'
+    - 'btop'
+    - 'fd'
+    - 'yazi'
+    - 'ffmpeg-full'
+    - 'sevenzip'
+    - 'jq'
+    - 'poppler'
+    - 'ripgrep'
+    - 'resvg'
+    - 'imagemagick-full'
+    casks:
+    - 'font-jetbrains-mono-nerd-font'
+    - 'font-symbols-only-nerd-font'
+  linux:
+    nixpkgs:
+    - 'git'
+    - 'fzf'
+    - 'zoxide'
+    - 'eza'
+    - 'btop'
+    - 'fd'
+    - 'yazi'
+    - 'ffmpeg-full'
+    - 'p7zip'
+    - 'jq'
+    - 'poppler_utils'
+    - 'ripgrep'
+    - 'resvg'
+    - 'imagemagick'
+    - 'nerd-fonts.jetbrains-mono'
+    - 'nerd-fonts.symbols-only'
+    flakes:
+    - 'github:michel-kraemer/zsh-patina'

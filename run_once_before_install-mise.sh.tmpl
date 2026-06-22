@@ -1,9 +1,0 @@
-#!/bin/sh
-# Installs mise on Linux — downloads precompiled binaries, no root required.
-
-{{ if eq .chezmoi.os "linux" -}}
-echo "Checking mise..."
-if ! command -v mise >/dev/null 2>&1 && ! [ -x "$HOME/.local/bin/mise" ]; then
-    curl https://mise.run | sh
-fi
-{{ end -}}
