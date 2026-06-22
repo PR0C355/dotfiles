@@ -34,8 +34,11 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#A9A9A9,bold,underline"
 
 # Package manager bootstrap
 {{ if eq .chezmoi.os "darwin" -}}
-[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)" \
-    || [[ -x /usr/local/bin/brew ]] && eval "$(/usr/local/bin/brew shellenv)"
+if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
 {{ else if eq .chezmoi.os "linux" -}}
 [[ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]] && . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 export PATH="$HOME/.local/bin:$PATH"
