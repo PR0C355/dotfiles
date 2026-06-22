@@ -4,6 +4,7 @@ packages:
     - 'michel-kraemer/zsh-patina'
     brews:
     - 'git'
+    - 'chezmoi'
     - 'zsh-patina'
     - 'fzf'
     - 'zoxide'
@@ -24,6 +25,7 @@ packages:
   linux:
     nixpkgs:
     - 'git'
+    - 'chezmoi'
     - 'fzf'
     - 'zoxide'
     - 'eza'
