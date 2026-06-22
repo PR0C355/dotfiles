@@ -10,6 +10,7 @@ alias l.='ls --color=auto -d .* '
 ## Git aliases
 alias g='git'
 alias gs='git status'
+alias gc='git commit -m'
 
 ## Alias for fastfetch
 alias ff='fastfetch --config ~/.config/fastfetch/config.jsonc'
