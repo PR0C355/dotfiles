@@ -1,10 +1,51 @@
 {{ if eq .chezmoi.os "linux" -}}
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 # Installs Nix if not already present (single-user installation).
 
-if ! command -v nix >/dev/null 2>&1; then
-    curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+echo "Starting Rootless Nix Installation..."
+
+# Define installation directories
+NIX_USER_DIR="$HOME/.nix"
+BIN_DIR="$HOME/.local/bin"
+CHROOT_BIN="$BIN_DIR/nix-user-chroot"
+
+# 1. Verify User Namespaces are enabled (Required for this method)
+if ! unshare --user --pid echo >/dev/null 2>&1; then
+    echo "❌ Error: User namespaces are not enabled on this system kernel."
+    echo "nix-user-chroot cannot run. See the 'nix-portable' alternative below."
+    exit 1
 fi
+echo "✅ User namespaces are supported."
+
+# 2. Create necessary directories
+echo "✅ Creating directories in $HOME..."
+mkdir -p -m 0755 "$NIX_USER_DIR"
+mkdir -p -m 0755 "$BIN_DIR"
+
+# 3. Download the nix-user-chroot binary
+echo "✅ Downloading nix-user-chroot..."
+LATEST_TAG=$(curl -s https://api.github.com/repos/nix-community/nix-user-chroot/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+# Fallback just in case the API rate limits
+if [ -z "$LATEST_TAG" ]; then
+    LATEST_TAG="1.2.2" 
+fi
+
+DOWNLOAD_URL="https://github.com/nix-community/nix-user-chroot/releases/download/${LATEST_TAG}/nix-user-chroot-bin-${LATEST_TAG}-x86_64-unknown-linux-musl"
+curl -sL "$DOWNLOAD_URL" -o "$CHROOT_BIN"
+chmod +x "$CHROOT_BIN"
+
+# 4. Run the official Nix installer INSIDE the chroot
+echo "✅ Executing official Nix installer..."
+"$CHROOT_BIN" "$NIX_USER_DIR" bash -c "curl -sL https://nixos.org/nix/install | bash -s -- --no-daemon"
+
+echo ""
+echo "🎉 Nix has been successfully installed!"
+echo "--------------------------------------------------------"
+echo "To use Nix, you must enter the chroot environment where '/nix' exists."
+echo "Run this command to start a Nix-enabled shell:"
+echo "  $CHROOT_BIN $NIX_USER_DIR bash"
+echo "--------------------------------------------------------"
 
 # Source nix profile
 . "$HOME/.nix-profile/etc/profile.d/nix.sh"
