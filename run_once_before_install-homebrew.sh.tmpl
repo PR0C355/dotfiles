@@ -3,11 +3,13 @@
 # On Linux this installs to ~/.linuxbrew — no root required.
 
 {{ if eq .chezmoi.os "darwin" -}}
+echo "Installing Homebrew..."
 if ! command -v brew >/dev/null 2>&1; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 {{ else if eq .chezmoi.os "linux" -}}
+echo "Installing Homebrew to $HOME/.linuxbrew..."
 if ! [ -x "$HOME/.linuxbrew/bin/brew" ]; then
     # Use tar extraction — the standard installer requires sudo on Linux.
     mkdir -p "$HOME/.linuxbrew"
