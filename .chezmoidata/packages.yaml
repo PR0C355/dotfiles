@@ -6,6 +6,7 @@ packages:
     - 'git'
     - 'chezmoi'
     - 'zsh-patina'
+    - 'starship'
     - 'fzf'
     - 'zoxide'
     - 'eza'
@@ -26,6 +27,7 @@ packages:
     nixpkgs:
     - 'git'
     - 'chezmoi'
+    - 'starship'
     - 'fzf'
     - 'zoxide'
     - 'eza'
