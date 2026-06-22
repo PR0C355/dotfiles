@@ -4,6 +4,9 @@
 # Source nix so it's available in this shell
 . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
+# Ensure flakes are enabled even if nix.conf isn't deployed yet
+export NIX_CONFIG="experimental-features = nix-command flakes"
+
 echo "Installing packages with nix..."
 
 {{ range .packages.linux.nixpkgs -}}
@@ -13,7 +16,7 @@ nix profile add nixpkgs#{{ . }}
 echo "Installing flake packages with nix..."
 
 {{ range .packages.linux.flakes -}}
-nix profile add {{ . }}
+nix profile add --no-write-lock-file {{ . }}
 {{ end -}}
 
 echo "All packages installed."
