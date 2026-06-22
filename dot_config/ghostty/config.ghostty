@@ -19,3 +19,17 @@ macos-icon = xray
 macos-icon-frame = chrome
 
 custom-shader = shaders/cursor_tail.glsl
+
+# Jump to start/end of line (Cmd + Left/Right)
+keybind = cmd+left=text:\x01
+keybind = cmd+right=text:\x05
+
+# Move cursor by word (Option + Left/Right)
+keybind = opt+left=esc:b
+keybind = opt+right=esc:f
+
+# Delete word backward (Option + Backspace)
+keybind = opt+backspace=esc:\x7f
+
+# Delete line backward (Cmd + Backspace) - Optional, but very handy!
+keybind = cmd+backspace=text:\x15

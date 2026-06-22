@@ -1,0 +1,19 @@
+#!/bin/sh
+# Installs Homebrew if not already present.
+# On Linux this installs to ~/.linuxbrew — no root required.
+
+{{ if eq .chezmoi.os "darwin" -}}
+if ! command -v brew >/dev/null 2>&1; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+{{ else if eq .chezmoi.os "linux" -}}
+if ! command -v brew >/dev/null 2>&1 \
+    && ! [ -x "$HOME/.linuxbrew/bin/brew" ] \
+    && ! [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+    mkdir -p "$HOME/.linuxbrew"
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh \
+        | HOMEBREW_PREFIX="$HOME/.linuxbrew" bash
+fi
+
+{{ end -}}

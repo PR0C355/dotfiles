@@ -1,5 +1,13 @@
 # ~/.zshrc
 
+# Force zsh into emacs mode so it understands Ghostty's standard text codes
+bindkey -e
+
+# Make sure word jump/delete are mapped to standard escape codes
+bindkey "^[b" backward-word
+bindkey "^[f" forward-word
+bindkey "^[^?" backward-kill-word
+
 # ==============================================================================
 # 1. ENVIRONMENT VARIABLES
 # ==============================================================================
@@ -24,11 +32,21 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#A9A9A9,bold,underline"
 # 2. PATH & FPATH
 # ==============================================================================
 
+# Bootstrap Homebrew — sets PATH, MANPATH, INFOPATH
+{{ if eq .chezmoi.os "darwin" -}}
+[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)" \
+    || [[ -x /usr/local/bin/brew ]] && eval "$(/usr/local/bin/brew shellenv)"
+{{ else if eq .chezmoi.os "linux" -}}
+[[ -x ~/.linuxbrew/bin/brew ]] && eval "$(~/.linuxbrew/bin/brew shellenv)" \
+    || [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+{{ end }}
 # eza completions (Add to FPATH before compinit/plugins load)
 export FPATH="$HOME/.local/share/eza/completions/zsh:$FPATH"
 
 # User paths
-export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+{{ if eq .chezmoi.os "darwin" -}}
+export PATH="$(brew --prefix openjdk@17)/bin:$PATH"
+{{ end -}}
 export PATH="$HOME/.opencode/bin:$PATH"
 
 
@@ -49,15 +67,13 @@ fi
 # 4. ZNAP & PLUGINS
 # ==============================================================================
 
-# Custom CLI Tip of the Day (Cross-Platform)
+# Custom CLI Tip of the Day
 if [ -f ~/.cli_tips.txt ]; then
-    if [ "$(uname)" = "Darwin" ]; then
-        # macOS specific: Uses awk for randomization
-        RANDOM_TIP=$(awk 'BEGIN{srand()} {a[NR]=$0} END{print a[int(rand()*NR)+1]}' ~/.cli_tips.txt)
-    else
-        # Linux specific: Uses shuf
-        RANDOM_TIP=$(shuf -n 1 ~/.cli_tips.txt)
-    fi
+    {{- if eq .chezmoi.os "darwin" }}
+    RANDOM_TIP=$(awk 'BEGIN{srand()} {a[NR]=$0} END{print a[int(rand()*NR)+1]}' ~/.cli_tips.txt)
+    {{- else }}
+    RANDOM_TIP=$(shuf -n 1 ~/.cli_tips.txt)
+    {{- end }}
     echo -e "\n💡 Tip: $RANDOM_TIP"
 fi
 
@@ -74,6 +90,7 @@ znap prompt
 # Core Plugins
 znap source zsh-users/zsh-completions
 znap source zsh-users/zsh-autosuggestions
+znap source jirutka/zsh-shift-select
 znap source Aloxaf/fzf-tab
 znap source wfxr/forgit
 
