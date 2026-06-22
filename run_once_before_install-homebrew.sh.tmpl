@@ -8,12 +8,11 @@ if ! command -v brew >/dev/null 2>&1; then
 fi
 
 {{ else if eq .chezmoi.os "linux" -}}
-if ! command -v brew >/dev/null 2>&1 \
-    && ! [ -x "$HOME/.linuxbrew/bin/brew" ] \
-    && ! [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+if ! [ -x "$HOME/.linuxbrew/bin/brew" ]; then
+    # Use tar extraction — the standard installer requires sudo on Linux.
     mkdir -p "$HOME/.linuxbrew"
-    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh \
-        | HOMEBREW_PREFIX="$HOME/.linuxbrew" bash
+    curl -fsSL https://github.com/Homebrew/brew/tarball/main \
+        | tar xz --strip-components 1 -C "$HOME/.linuxbrew"
 fi
 
 {{ end -}}
