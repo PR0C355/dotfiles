@@ -1,6 +1,9 @@
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/bash
 
+# Source nix so it's available in this shell
+. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+
 echo "Installing packages with nix..."
 
 {{ range .packages.linux.nixpkgs -}}
