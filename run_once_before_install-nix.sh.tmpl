@@ -7,6 +7,6 @@ if ! command -v nix >/dev/null 2>&1; then
 fi
 
 # Source nix profile
-. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+eval "$("$HOME/.nix-profile/etc/profile.d/nix.sh")"
 
 {{ end -}}
