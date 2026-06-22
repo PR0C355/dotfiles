@@ -32,13 +32,13 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#A9A9A9,bold,underline"
 # 2. PATH & FPATH
 # ==============================================================================
 
-# Bootstrap Homebrew — sets PATH, MANPATH, INFOPATH
+# Package manager bootstrap
 {{ if eq .chezmoi.os "darwin" -}}
 [[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)" \
     || [[ -x /usr/local/bin/brew ]] && eval "$(/usr/local/bin/brew shellenv)"
 {{ else if eq .chezmoi.os "linux" -}}
-[[ -x ~/.linuxbrew/bin/brew ]] && eval "$(~/.linuxbrew/bin/brew shellenv)" \
-    || [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+export PATH="$HOME/.local/bin:$PATH"
+[[ -x "$HOME/.local/bin/mise" ]] && eval "$("$HOME"/.local/bin/mise activate zsh)"
 {{ end }}
 # eza completions (Add to FPATH before compinit/plugins load)
 export FPATH="$HOME/.local/share/eza/completions/zsh:$FPATH"

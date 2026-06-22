@@ -1,20 +1,9 @@
 #!/bin/sh
-# Installs Homebrew if not already present.
-# On Linux this installs to ~/.linuxbrew — no root required.
+# Installs Homebrew on macOS if not already present.
 
 {{ if eq .chezmoi.os "darwin" -}}
-echo "Installing Homebrew..."
+echo "Checking Homebrew..."
 if ! command -v brew >/dev/null 2>&1; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
-
-{{ else if eq .chezmoi.os "linux" -}}
-echo "Installing Homebrew to $HOME/.linuxbrew..."
-if ! [ -x "$HOME/.linuxbrew/bin/brew" ]; then
-    # Use tar extraction — the standard installer requires sudo on Linux.
-    mkdir -p "$HOME/.linuxbrew"
-    curl -fsSL https://github.com/Homebrew/brew/tarball/main \
-        | tar xz --strip-components 1 -C "$HOME/.linuxbrew"
-fi
-
 {{ end -}}
